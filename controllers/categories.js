@@ -11,24 +11,19 @@ class CategoryController {
     })
       .then((categories) => {
         if (categories.length > 0) {
-          // next({
-          //   status: 409,
-          //   error: "Resource already exists",
-          //   message:
-          //     "The resource you are trying to create already exists. Please update the existing resource or choose a different identifier.",
-          // });
+          next({
+            status:409,
+            message: "The resource you are trying to create already exists. Please update the existing resource or choose a different identifier."
+          })
         } else if (name.length == 0) {
-          console.log('masuk ke sini ga');
-          // next({
-          //   status: 400,
-          //   error: "Empty name data",
-          //   message: "Name length data must bigger than 0",
-          // });
+          next({
+            status: 400,
+            message: "Name length data must bigger than 0",
+          });
         } else {
           Category.create({
             name: name.toLowerCase(),
           }).then((category) => {
-            console.log(category);
             res.status(201).json({
               status: 201,
               message: "Success create new category",
