@@ -4,7 +4,7 @@ const menus = require("./menu");
 const categories = require("./category");
 
 router.get("/", (req, res) => {
-  res.send("masuk kesini");
+  res.send("Kitchens API");
 });
 router.use(menus);
 router.use(categories);
