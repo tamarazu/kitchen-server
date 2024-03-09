@@ -7,7 +7,7 @@ module.exports = {
     return Promise.all([
       queryInterface.addColumn("Menus", "image", {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
       }),
     ]);
   },

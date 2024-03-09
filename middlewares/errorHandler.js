@@ -3,7 +3,8 @@
 module.exports = (err, req, res, next) => {
   if (
     err.name === "SequelizeValidationError" ||
-    err.name === "SequelizeUniqueConstraintError"
+    err.name === "SequelizeUniqueConstraintError" || 
+    err.name === "SequelizeDatabaseError"
   ) {
     let errors = err.errors.map((el) => el.message);
     res.status(400).json({
