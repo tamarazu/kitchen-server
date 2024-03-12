@@ -1,5 +1,5 @@
 FROM node:14
-WORKDIR /kitchen-server
+WORKDIR /server
 
 COPY package.json .
 RUN npm install
