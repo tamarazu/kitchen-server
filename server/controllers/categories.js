@@ -40,10 +40,11 @@ class CategoryController {
         res.status(200).json({
           status: 200,
           data: categories,
-        });
+        });j
       })
       .catch(next);
   }
+
 }
 
 module.exports = CategoryController;

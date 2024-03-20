@@ -48,6 +48,19 @@ class MenuController {
       include: [Category],
     })
       .then((menus) => {
+        console.log(menus);
+        res.status(200).json(menus);
+      })
+      .catch(next);
+  }
+
+  static findByCategoryId(req, res, next) {
+    Menu.findAll({
+      where: {
+        CategoryId: req.params.id,
+      },
+    })
+      .then((menus) => {
         res.status(200).json(menus);
       })
       .catch(next);
