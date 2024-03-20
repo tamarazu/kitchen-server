@@ -3,6 +3,7 @@ const { Menu, Category } = require("../models");
 class MenuController {
   static create(req, res, next) {
     const { name, price, image } = req.body;
+    console.log(req.body);
     Menu.findAll({
       where: {
         name: name.toLowerCase(),
@@ -31,8 +32,7 @@ class MenuController {
             message: "Image length data must bigger than 0",
           });
         } else {
-          Menu.create(req.body)
-          .then(() => {
+          Menu.create(req.body).then(() => {
             res.status(201).json({
               status: 201,
               message: "Success created",
