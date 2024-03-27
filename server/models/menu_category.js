@@ -3,14 +3,18 @@ module.exports = (sequelize, DataTypes) => {
   const Model = sequelize.Sequelize.Model;
   class Menu_Category extends Model {
     static associate(models) {
-      Menu_Category.belongToMany(models.Menu, { through: 'Menu_Category'})
-      Menu_Category.belongToMany(models.Category, { through: 'Menu_Category'})
+      Menu_Category.belongsTo(models.Menu)
+      Menu_Category.belongsTo(models.Category)
     }
   }
   Menu_Category.init(
     {
-      id: DataTypes.INTEGER,
-      selfGranted: DataTypes.BOOLEAN,
+      id: {
+        allowNull: false,
+        autoIncrement: true,
+        primaryKey: true,
+        type: DataTypes.INTEGER
+      },
       Category_Id: DataTypes.INTEGER,
       Menu_Id: DataTypes.INTEGER
     },

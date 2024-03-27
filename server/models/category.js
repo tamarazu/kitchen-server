@@ -4,16 +4,17 @@ module.exports = (sequelize, DataTypes) => {
 
   class Category extends Model {
     static associate(models) {
-      // Category.hasMany(models.Menu);
-      // Category.belongToMany(models.Menu, {through: 'Menu_Categories'})
+      Category.belongsToMany(models.Menu, { through: models.Menu_Category });
     }
   }
 
-  Category.init({
-    name: DataTypes.STRING,
-  }, 
-  {
-    sequelize
-  });
+  Category.init(
+    {
+      name: DataTypes.STRING,
+    },
+    {
+      sequelize,
+    }
+  );
   return Category;
 };

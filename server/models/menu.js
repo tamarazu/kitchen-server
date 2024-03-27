@@ -3,6 +3,7 @@ module.exports = (sequelize, DataTypes) => {
   const Model = sequelize.Sequelize.Model;
   class Menu extends Model {
     static associate(models) {
+      Menu.belongsToMany(models.Category, { through: models.Menu_Category });
     }
   }
   Menu.init(
@@ -10,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
       name: DataTypes.STRING,
       price: DataTypes.INTEGER,
       CategoryId: DataTypes.INTEGER,
-      image: DataTypes.STRING
+      image: DataTypes.STRING,
     },
     {
       sequelize,
