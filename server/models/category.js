@@ -4,7 +4,8 @@ module.exports = (sequelize, DataTypes) => {
 
   class Category extends Model {
     static associate(models) {
-      Category.hasMany(models.Menu);
+      // Category.hasMany(models.Menu);
+      // Category.belongToMany(models.Menu, {through: 'Menu_Categories'})
     }
   }
 

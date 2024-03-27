@@ -45,6 +45,16 @@ class CategoryController {
       .catch(next);
   }
 
+  // static findOne(req, res, next) {
+  //   Category.findOne({})
+  //     .then((categories) => {
+  //       res.status(200).json({
+  //         status: 200,
+  //         data: categories,
+  //       });
+  //     })
+  //     .catch(next);
+  // }
 }
 
 module.exports = CategoryController;

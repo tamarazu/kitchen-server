@@ -3,7 +3,6 @@ module.exports = (sequelize, DataTypes) => {
   const Model = sequelize.Sequelize.Model;
   class Menu extends Model {
     static associate(models) {
-      Menu.belongsTo(models.Category);
     }
   }
   Menu.init(

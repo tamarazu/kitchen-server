@@ -46,6 +46,9 @@ class MenuController {
   static findAll(req, res, next) {
     Menu.findAll({
       include: [Category],
+      where: {
+        CategoryId: req.query.category_id 
+      }
     })
       .then((menus) => {
         console.log(menus);
@@ -55,6 +58,7 @@ class MenuController {
   }
 
   static findByCategoryId(req, res, next) {
+    console.log(req.query)
     Menu.findAll({
       where: {
         CategoryId: req.params.id,
