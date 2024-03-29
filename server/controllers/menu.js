@@ -3,7 +3,6 @@ const { Menu, Category } = require("../models");
 class MenuController {
   static create(req, res, next) {
     const { name, price, image } = req.body;
-    console.log(req.body);
     Menu.findAll({
       where: {
         name: name.toLowerCase(),
@@ -44,27 +43,13 @@ class MenuController {
   }
 
   static findAll(req, res, next) {
+    console.log('masuk ke sini');
     Menu.findAll({
-      include: [Category],
-      where: {
-        CategoryId: req.query.category_id 
-      }
+      // include: [Category]
+      
     })
       .then((menus) => {
         console.log(menus);
-        res.status(200).json(menus);
-      })
-      .catch(next);
-  }
-
-  static findByCategoryId(req, res, next) {
-    console.log(req.query)
-    Menu.findAll({
-      where: {
-        CategoryId: req.params.id,
-      },
-    })
-      .then((menus) => {
         res.status(200).json(menus);
       })
       .catch(next);

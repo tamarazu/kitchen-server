@@ -1,13 +1,13 @@
 "use strict";
 module.exports = (sequelize, DataTypes) => {
   const Model = sequelize.Sequelize.Model;
-  class Menu_Category extends Model {
+  class MenuCategories extends Model {
     static associate(models) {
-      Menu_Category.belongsTo(models.Menu)
-      Menu_Category.belongsTo(models.Category)
+      MenuCategories.belongsTo(models.Menu);
+      MenuCategories.belongsTo(models.Category);
     }
   }
-  Menu_Category.init(
+  MenuCategories.init(
     {
       id: {
         allowNull: false,
@@ -15,12 +15,13 @@ module.exports = (sequelize, DataTypes) => {
         primaryKey: true,
         type: DataTypes.INTEGER
       },
-      Category_Id: DataTypes.INTEGER,
-      Menu_Id: DataTypes.INTEGER
+      MenuId: DataTypes.INTEGER,
+      CategoryId: DataTypes.INTEGER,
     },
     {
       sequelize,
     }
   );
-  return Menu_Category;
+
+  return MenuCategories;
 };

@@ -1,9 +1,8 @@
-const { Category } = require("../models");
+const { Category, Menu } = require("../models");
 
 class CategoryController {
   static create(req, res, next) {
     const { name } = req.body;
-    console.log(name.length);
     Category.findAll({
       where: {
         name: name.toLowerCase(),
@@ -45,16 +44,32 @@ class CategoryController {
       .catch(next);
   }
 
-  // static findOne(req, res, next) {
-  //   Category.findOne({})
-  //     .then((categories) => {
-  //       res.status(200).json({
-  //         status: 200,
-  //         data: categories,
-  //       });
-  //     })
-  //     .catch(next);
-  // }
+  static findMenuByCategory(req, res, next) {
+    Category.findAll({
+      where: {
+        id: req.query.category_id
+      },
+      include: [
+        {
+          model: Menu,
+          as: 'Menus',
+          attributes: [
+            'id',
+            'name',
+            'price',
+            'image'
+          ]
+        }
+      ]
+    })
+    .then(menu => {
+      res.status(200).json({
+        status: 200,
+        data: menu
+      })
+    })
+    .catch(next)
+  }
 }
 
 module.exports = CategoryController;
