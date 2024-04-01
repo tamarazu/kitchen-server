@@ -62,10 +62,11 @@ class CategoryController {
         }
       ]
     })
-    .then(menu => {
+    .then((data) => {
+      // console.log(d);
       res.status(200).json({
         status: 200,
-        data: menu
+        data
       })
     })
     .catch(next)

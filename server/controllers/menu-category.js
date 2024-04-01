@@ -4,34 +4,35 @@ const { MenuCategories, Category, Menu } = require("../models");
 class MenuController {
   static create(req, res, next) {
     console.log(req.body);
-    MenuCategories
-      .create(req.body)
+    MenuCategories.create(req.body)
       .then(() => {
         res.status(201).json({
           status: 201,
-          message: "Success create new menu categories"
-        })
+          message: "Success create new menu categories",
+        });
       })
-      .catch(next)
+      .catch(next);
   }
 
   static findAll(req, res, next) {
     MenuCategories.findAll({
       where: {
-        CategoryId: req.query.category_id || 1
+        CategoryId: req.query.category_id || 1,
       },
-      attributes: [
-        'id'
+      attributes: ["id"],
+      include: [
+        {
+          model: Menu,
+          as: "Menu",
+          attributes: ["id", "name", "price", "image"],
+        },
       ],
-      include: [Menu]
     })
-      .then((menus) => {
-        const menu = []
-        if (menus.length) {
-          menus.map(value => {
-            // console.log(json(value));
-          })
-        }
+      .then(value => {
+        const menus = [];
+        value.map(menu => {
+          menus.push(menu.Menu)
+        })
         res.status(200).json({
           status: 200,
           data: menus,

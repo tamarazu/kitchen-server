@@ -43,9 +43,7 @@ class MenuController {
   }
 
   static findAll(req, res, next) {
-    console.log('masuk ke sini');
     Menu.findAll({
-      // include: [Category]
       
     })
       .then((menus) => {
