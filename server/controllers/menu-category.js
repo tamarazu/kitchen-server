@@ -3,7 +3,6 @@ const { MenuCategories, Category, Menu } = require("../models");
 
 class MenuController {
   static create(req, res, next) {
-    console.log(req.body);
     MenuCategories.create(req.body)
       .then(() => {
         res.status(201).json({

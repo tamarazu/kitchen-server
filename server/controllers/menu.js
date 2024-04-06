@@ -1,4 +1,6 @@
 const { Menu, Category } = require("../models");
+const Sequelize = require("sequelize");
+const Op = Sequelize.Op;
 
 class MenuController {
   static create(req, res, next) {
@@ -43,12 +45,51 @@ class MenuController {
   }
 
   static findAll(req, res, next) {
+    Menu.findAll()
+      .then((menus) => {
+        res.status(200).json({
+          status: 200,
+          data: menus,
+        });
+      })
+      .catch(next);
+  }
+
+  static findOne(req, res, next) {
+    Menu.findOne({
+      where: {
+        id: req.params.id,
+      },
+      include: [
+        {
+          model: Category,
+          as: "Categories",
+          attributes: ["id", "name"],
+        },
+      ],
+    })
+      .then((menu) => {
+        const categories = []
+        
+        res.status(200).json({
+          status: 200,
+          data: menu,
+        });
+      })
+      .catch(next);
+  }
+
+  static findByName(req, res, next) {
     Menu.findAll({
-      
+      where: {
+        name: { [Op.like]: "%" + req.query.name + "%" } || "",
+      },
     })
       .then((menus) => {
-        console.log(menus);
-        res.status(200).json(menus);
+        res.status(200).json({
+          status: 200,
+          data: menus,
+        });
       })
       .catch(next);
   }
